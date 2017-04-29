@@ -1,9 +1,9 @@
-defmodule App.User do
+defmodule App.Asset do
   use App.Web, :model
 
-  schema "users" do
+  schema "assets" do
     field :name, :string
-    field :email, :string
+    field :location, :string
 
     timestamps()
   end
@@ -13,7 +13,7 @@ defmodule App.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email])
-    |> validate_required([:name, :email])
+    |> cast(params, [:name, :location])
+    |> validate_required([:name, :location])
   end
 end

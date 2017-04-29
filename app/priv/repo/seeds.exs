@@ -1,14 +1,26 @@
+# Script for populating the database. You can run it as:
+#
+#     mix run priv/repo/seeds.exs
+#
+# Inside the script, you can read and write to any of your
+# repositories directly:
+#
+#     App.Repo.insert!(%App.SomeModel{})
+#
+# We recommend using the bang functions (`insert!`, `update!`
+# and so on) as they will fail if something goes wrong.
+#
+# 
 alias App.User
-alias App.Post
+alias App.Asset
 alias App.Repo
  
-Repo.insert!(%User{name: "Ryan Swapp", email: "ryan@ryan.com"})
-Repo.insert!(%User{name: "Rosie", email: "rosie@mydog.com"})
+Faker.start
+# Repo.insert!(%User{name: "Benjamin", email: "benjamin@me.com"})
  
-for _ <- 1..1000000 do
-  Repo.insert!(%Post{
-    title: Faker.Lorem.sentence,
-    body: Faker.Lorem.paragraph,
-    user_id: [1, 2] |> Enum.take_random(1) |> hd
+for _ <- 1..100 do
+  Repo.insert!(%Asset{
+    name: Faker.Name.first_name,
+    location: Faker.Address.country,
   })
 end
