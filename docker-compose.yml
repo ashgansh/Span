@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-    - "4005:4000"
+    - "4000:4000"
     command: mix phoenix.server
     tty: true
     stdin_open: true
@@ -18,3 +18,10 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432"
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/:/app
+    ports: 
+      - "3000:3000"
+    command: npm start
