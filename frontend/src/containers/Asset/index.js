@@ -10,17 +10,18 @@ const renderAsset = (asset, index) => {
 export const Assets = ({ data: { loading, assets, error } }) => {
   if (loading) return <div>Loading</div>;
   if (error) return <div>ERROR</div>;
+  console.log(assets)
   return (
     <div>
       <ul>
-        {assets.map((asset, index) => renderAsset(asset)).reverse()}
+        {assets.map((asset, index) => renderAsset(asset)).sort()}
       </ul>
     </div>
   )
 }
 
 export const ASSETS_QUERY = gql`
-  query {
+  query hello{
     assets {
       name
     }

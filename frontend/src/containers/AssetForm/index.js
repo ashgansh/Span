@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import update from 'immutability-helper';
 import { gql, graphql } from 'react-apollo';
 
 
@@ -16,33 +17,73 @@ const Button = styled.button`
 `;
 
 class AssetForm extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      location: '',
+    }
+  }
+
   onClick = (e) => {
     e.preventDefault()
-    console.log('test')
-    this.props.mutate()
+    this.props.createAsset(this.state.name, 'shams')
       .then(({ data }) => console.log('got data', data))
       .catch((error) => console.log('there was an error', error))
   }
+
+  onChange = (e) => {
+    this.setState({
+      name: e.target.value,
+    })
+  }
+
   render() {
 
     return (
       <form>
         <label>Name</label>
-        <input />
-        <Button onClick={this.onClick.bind(this)} />
+        <input onChange={this.onChange.bind(this)}/>
+        <Button onClick={this.onClick.bind(this)}>Click</Button>
       </form>
     )
   }
 }
 
 
-const createAsset = gql`
-  mutation CreateAsset {
-    create_asset(name: "my object", location: "my home")  {
+const SUBMIT_DATA_MUTATION = gql`
+  mutation CreateAsset($name: String!, $location: String!) {
+    create_asset(name: $name, location: $location)  {
       name
     }
   }
 `
+// const SUBMIT_DATA_MUTATION = gql`
+//   mutation CreateAsset {
+//     create_asset(name: "my object3", location: "my home")  {
+//       name
+//     }
+//   }
+// `
 
-const AssetFormWithData = graphql(createAsset)(AssetForm);
+const AssetFormWithData = graphql(SUBMIT_DATA_MUTATION, {
+  props: ({ ownProps, mutate }) => ({
+    createAsset: (name, location) =>  mutate({
+      variables: {name, location },
+      updateQueries: {
+        hello: (prev, { mutationResult }) => {
+          const newAsset = mutationResult.data.create_asset;
+          console.log(newAsset)
+          return update(prev, {
+            assets: {
+              $unshift: [newAsset],
+            }
+          })
+        }
+      }
+    })
+  })
+})(AssetForm);
 export default AssetFormWithData
