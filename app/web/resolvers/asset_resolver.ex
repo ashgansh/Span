@@ -11,4 +11,9 @@ defmodule App.AssetResolver do
     |> Asset.changeset(args)
     |> Repo.insert
   end
+
+  def delete(%{id: id}, _info) do
+    asset = Repo.get!(Asset, id)
+    Repo.delete(asset)
+  end
 end

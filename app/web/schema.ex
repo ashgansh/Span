@@ -23,5 +23,11 @@ defmodule App.Schema do
 
       resolve &App.AssetResolver.create/2
     end
+
+    field :delete_asset, type: :asset do
+      arg :id, non_null(:integer)
+
+      resolve &App.AssetResolver.delete/2
+    end
   end
 end

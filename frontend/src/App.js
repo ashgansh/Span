@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { ApolloClient, createNetworkInterface, ApolloProvider} from 'react-apollo';
-import Assets from './containers/Asset';
-import AssetForm from './containers/AssetForm';
 import styled from 'styled-components';
+import { ApolloClient, createNetworkInterface, ApolloProvider } from 'react-apollo';
+import './App.css';
+import Assets from './components/AssetList';
+import AssetForm from './components/AssetForm';
 
 const networkInterface = createNetworkInterface({
   uri: '/graphiql'
@@ -22,14 +21,12 @@ const ContentWrapper = styled.section`
   justify-content: space-between;
 `
 
-
 class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
         <div className="App">
           <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
           </div>
           <ContentWrapper>
             <Assets />
