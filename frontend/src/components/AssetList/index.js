@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, graphql, compose } from 'react-apollo';
-import List from './List';
+import List from '../Wrappers/List';
 import Delete from './DeleteAsset';
+import enhance from './enhancer';
 
 
 const renderAsset = (asset, index) => (
@@ -13,18 +14,13 @@ const renderAsset = (asset, index) => (
 );
 
 
-export const Assets = ({ data: { loading, assets, error } }) => {
-  if (loading) return <div>Loading</div>;
-  if (error) return <div>ERROR</div>;
-  if (assets && assets.length === 0) return <div>No Assets</div>;
-  return (
-    <div>
-      <ul>
-        {assets && assets.map((asset, index) => renderAsset(asset, index))}
-      </ul>
-    </div>
-  );
-};
+export const Assets = enhance(({ data: { assets } }) => (
+  <div>
+    <ul>
+      {assets && assets.map((asset, index) => renderAsset(asset, index))}
+    </ul>
+  </div>
+));
 
 Assets.propTypes = {
   data: PropTypes.shape({
@@ -37,15 +33,15 @@ Assets.propTypes = {
 
 export const assetsQuery = gql`
 query hello{
-  assets {
-    id
-    name
-    location
-  }
+assets {
+id
+name
+location
+}
 }`;
 
 export const withAsset = compose(
-graphql(assetsQuery),
+  graphql(assetsQuery),
 );
 
 export default withAsset(Assets);
