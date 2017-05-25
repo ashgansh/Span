@@ -3,7 +3,7 @@ defmodule App.Asset do
 
   schema "assets" do
     field :name, :string
-    field :location, :string
+    belongs_to :location, App.Location
 
     timestamps()
   end

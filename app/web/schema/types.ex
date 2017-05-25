@@ -11,7 +11,14 @@ defmodule App.Schema.Types do
   object :asset do
     field :id, :id
     field :name, :string
-    field :location, :string
+    field :location, :id
     field :timestamps, :string
+  end
+
+  object :location do
+    field :id, :id
+    field :name, :string
+    field :longitude, :float
+    field :latitude, :float
   end
 end
