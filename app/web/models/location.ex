@@ -6,7 +6,8 @@ defmodule App.Location do
     field :name, :string
     field :latitude, :float
     field :longitude, :float
-    has_many :assets, App.Asset
+    has_many :assets, Asset
+    belongs_to :user, App.User
 
     timestamps()
   end
@@ -14,9 +15,10 @@ defmodule App.Location do
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:name, :latitude, :longitude])
-    |> validate_required([:name, :latitude, :longitude])
+  def changeset(struct, params \\ %{}, user_id) do
+    location_struct = Map.put(struct, :user_id, user_id)
+    location_struct
+    |> cast(params, [:name, :latitude, :longitude, :user_id])
+    |> validate_required([:name, :latitude, :longitude, :user_id])
   end
 end

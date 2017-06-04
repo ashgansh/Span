@@ -11,7 +11,7 @@ defmodule App.Schema.Types do
   object :asset do
     field :id, :id
     field :name, :string
-    field :location, :id
+    field :location, :location, resolve: assoc(:location)
     field :timestamps, :string
   end
 
@@ -20,5 +20,10 @@ defmodule App.Schema.Types do
     field :name, :string
     field :longitude, :float
     field :latitude, :float
+    field :assets, list_of(:asset), resolve: assoc(:assets)
+  end
+
+  object :session do
+    field :token, :string
   end
 end

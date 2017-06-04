@@ -13,7 +13,7 @@ defmodule App.Asset do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :location])
-    |> validate_required([:name, :location])
+    |> cast(params, [:name, :location_id])
+    |> validate_required([:name, :location_id])
   end
 end
