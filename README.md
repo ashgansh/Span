@@ -10,7 +10,7 @@ This project is centered around the idea that our belongings have a lifespan and
 ## Installation
 ### First Time
 
-`git clone https://github.com/reactjs/react-redux.git`
+`git clone https://github.com/benjaminshafii/asset-manager.git`
 
 Run
 `docker-compose run web mix ecto.create`
