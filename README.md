@@ -1,7 +1,7 @@
 # Span
 
 
-For the busy or forgetful people having lots of issues on their mind who want to keep track of their belongings.
+For the busy or forgetful people who want to keep track of their belongings.
 This project is centered around the idea that our belongings have a lifespan and aims at notifying when they're reaching [EOL](https://en.wikipedia.org/wiki/End-of-life_(product))
 
 
