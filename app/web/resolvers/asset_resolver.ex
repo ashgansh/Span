@@ -15,9 +15,9 @@ defmodule App.AssetResolver do
     {:error, "Not authorized"}
   end
 
-  def create(args, _info) do
+  def create(args, %{context: %{current_user: %{id: id}}}) do
     %Asset{}
-    |> Asset.changeset(args)
+    |> Asset.changeset(args, id)
     |> Repo.insert
   end
 
