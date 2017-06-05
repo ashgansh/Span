@@ -55,6 +55,7 @@ mutation Login {
 Running your project 
 
 The following command is similar to using the Rails `console` or the Django `shell`
+
 `docker-compose run web ie -S mix`
 
 ## License
