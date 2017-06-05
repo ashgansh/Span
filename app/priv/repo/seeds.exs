@@ -13,14 +13,28 @@
 # 
 alias App.User
 alias App.Asset
+alias App.Location
 alias App.Repo
  
 Faker.start
-# Repo.insert!(%User{name: "Benjamin", email: "benjamin@me.com"})
- 
+%User{name: "Benjamin", email: "ben@ben.com"}
+|> User.registration_changeset(%{password: "password"})
+|> Repo.insert()
+
+for _ <- 1..10 do
+  Repo.insert!(%Location{
+    name: Faker.Commerce.En.department,
+    latitude: 49.6116,
+    longitude: 6.1319,
+    user_id: 1,
+  })
+end
+
+
 for _ <- 1..100 do
   Repo.insert!(%Asset{
     name: Faker.Name.first_name,
-    location: Faker.Address.country,
+    location_id: 1,
+    user_id: 1,
   })
 end
