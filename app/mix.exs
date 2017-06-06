@@ -9,6 +9,8 @@ defmodule App.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: ["coveralls": :test],
      aliases: aliases(),
      deps: deps()]
   end
@@ -44,7 +46,9 @@ defmodule App.Mixfile do
      {:absinthe_plug, "~> 1.1"},
      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
      {:poison, "~> 2.2"},
-     {:faker, "~> 0.7"}] 
+     {:faker, "~> 0.7"},
+     {:excoveralls, "~> 0.6", only: :test},
+    ] 
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
