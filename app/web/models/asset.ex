@@ -3,6 +3,7 @@ defmodule App.Asset do
 
   schema "assets" do
     field :name, :string
+    field :lifespan, :integer
     belongs_to :location, App.Location
     belongs_to :user, App.User
 
@@ -15,7 +16,7 @@ defmodule App.Asset do
   def changeset(struct, params \\ %{}, user_id) do
     asset_struct = Map.put(struct, :user_id, user_id)
     asset_struct
-    |> cast(params, [:name, :location_id, :user_id])
+    |> cast(params, [:name, :location_id, :user_id, :lifespan])
     |> validate_required([:name, :location_id, :user_id])
   end
 end

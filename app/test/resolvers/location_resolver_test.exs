@@ -36,7 +36,7 @@ defmodule App.LocationResolverTest do
                   |> Repo.insert()
 
     {:ok, location_list} = App.LocationResolver.all('', %{context: %{current_user: %{id: user.id}}})
-    assert length(location_list) == 0 
+    assert length(location_list) == 0
   end
 
   test "all location without a valid user object" do

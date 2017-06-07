@@ -8,6 +8,7 @@ defmodule App.AssetResolver do
       Asset
       |> where(user_id: ^id)
       |> Repo.all
+
     {:ok, assets}
   end
 

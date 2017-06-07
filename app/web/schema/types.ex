@@ -12,7 +12,7 @@ defmodule App.Schema.Types do
     field :id, :id
     field :name, :string
     field :location, :location, resolve: assoc(:location)
-    field :timestamps, :string
+    field :lifespan, :integer
   end
 
   object :location do

@@ -45,6 +45,7 @@ defmodule App.Schema do
     field :create_asset, type: :asset do
       arg :name, non_null(:string)
       arg :location_id, non_null(:integer)
+      arg :lifespan, :integer
 
       resolve &App.AssetResolver.create/2
     end
