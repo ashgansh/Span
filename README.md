@@ -13,7 +13,7 @@ This project is centered around the idea that our belongings have a lifespan and
 ### First Time
 
 #### Clone the Repo
-`git clone https://github.com/benjaminshafii/asset-manager.git`
+`git clone https://github.com/benjaminshafii/Span`
 
 
 #### Create a docker network
@@ -56,7 +56,7 @@ Running your project
 
 The following command is similar to using the Rails `console` or the Django `shell`
 
-`docker-compose run web ie -S mix`
+`docker-compose run web iex -S mix`
 
 ## License
 MIT
