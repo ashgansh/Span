@@ -31,9 +31,10 @@ for _ <- 1..10 do
 end
 
 
-for _ <- 1..100 do
+for _ <- 1..1000 do
   Repo.insert!(%Asset{
     name: Faker.Name.first_name,
+    lifespan: 100,
     location_id: 1,
     user_id: 1,
   })

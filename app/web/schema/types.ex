@@ -14,6 +14,7 @@ defmodule App.Schema.Types do
     field :location, :location, resolve: assoc(:location)
     field :lifespan, :integer
     field :inserted_at, :string
+    field :expires_at, :string
   end
 
   object :location do
