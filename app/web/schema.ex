@@ -22,8 +22,9 @@ defmodule App.Schema do
   end
 
   input_object :update_asset_params do
-    field :name, non_null(:string)
-    field :location_id, non_null(:integer)
+    field :name, :string
+    field :location_id, :integer
+    field :lifespan, :integer
   end
 
   input_object :update_user_params do

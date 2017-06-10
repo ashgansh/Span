@@ -15,9 +15,17 @@ defmodule App.Asset do
     case (changes) do
       %Ecto.Changeset{valid?: true, changes: %{ lifespan: lifespan }} ->
         {:ok, expires_at } = NaiveDateTime.utc_now()
-                     |> NaiveDateTime.add(lifespan, :second)
-                     |> DateTime.from_naive("Etc/UTC")
+                             |> NaiveDateTime.add(lifespan, :second)
+                             |> DateTime.from_naive("Etc/UTC")
 
+       changes
+       |> put_change(:expires_at, expires_at)
+      %Ecto.Changeset{valid?: true, data: %App.Asset{ inserted_at: inserted_at }, changes: %{ lifespan: lifespan }} ->
+
+        {:ok, expires_at } = inserted_at
+                             |> DateTime.to_naive
+                             |> NaiveDateTime.add(lifespan, :second)
+                             |> DateTime.from_naive("Etc/UTC")
        changes
        |> put_change(:expires_at, expires_at)
       _ ->

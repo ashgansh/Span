@@ -27,9 +27,11 @@ defmodule App.AssetResolver do
     Repo.delete(asset)
   end
 
-  def update(%{id: id, asset: asset_params}, _info) do
-    Repo.get!(Asset, id)
-    |> Asset.changeset(asset_params)
+  def update(%{id: id, asset: asset_params}, %{context: %{current_user: %{id: user_id}}}) do
+    Asset
+    |> where(user_id: ^user_id)
+    |> Repo.get(id)
+    |> Asset.changeset(asset_params, user_id)
     |> Repo.update
   end
 end
