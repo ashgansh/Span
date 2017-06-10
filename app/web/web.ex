@@ -20,6 +20,7 @@ defmodule App.Web do
     quote do
       use Ecto.Schema
 
+      @timestamps_opts type: :utc_datetime
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
