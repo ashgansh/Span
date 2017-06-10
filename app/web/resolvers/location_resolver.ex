@@ -25,4 +25,12 @@ defmodule App.LocationResolver do
     location = Repo.get!(Location, id)
     Repo.delete(location)
   end
+
+  def update(%{id: id, location: location_params}, %{context: %{current_user: %{id: user_id}}}) do
+    Location
+    |> where(user_id: ^user_id)
+    |> Repo.get(id)
+    |> Location.changeset(location_params, user_id)
+    |> Repo.update
+  end
 end

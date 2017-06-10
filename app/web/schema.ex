@@ -27,6 +27,12 @@ defmodule App.Schema do
     field :lifespan, :integer
   end
 
+  input_object :update_location_params do
+    field :name, :string
+    field :longitude, :float
+    field :latitude, :float
+  end
+
   input_object :update_user_params do
     field :name, non_null(:string)
     field :email, non_null(:string)
@@ -78,6 +84,13 @@ defmodule App.Schema do
       arg :longitude, non_null(:float)
 
       resolve &App.LocationResolver.create/2
+    end
+
+    field :update_location, type: :location do
+      arg :id, non_null(:integer)
+      arg :location, :update_location_params
+
+      resolve &App.LocationResolver.update/2
     end
 
     field :delete_location, type: :location do
