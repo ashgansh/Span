@@ -19,12 +19,16 @@ This project is centered around the idea that our belongings have a lifespan and
 #### Create a docker network
 `docker network create span`
 
+#### Add the deps
+`docker-compose run web mix deps.get`
+
 #### Generate the db
 ```
 # Launch postgres in the background
 docker-compose up -d postgres
 docker-compose run web mix ecto.create
 ```
+
 #### Apply all the migrations
 `docker-compose run web mix ecto.migrate`
 
@@ -32,7 +36,7 @@ docker-compose run web mix ecto.create
 
 Check the file to see what data is generated. Change it as you will!
 
-`docker-compose run web mix priv/repo/seeds.exs`
+`docker-compose run web mix run priv/repo/seeds.exs`
 
 
 ### To Launch the containers
@@ -50,6 +54,22 @@ mutation Login {
 }
 ```
 
+Copy your token (without the double quotes)
+
+In the query params on top change the URL section to:
+
+`http://localhost:4000/api`
+
+then in the `Headers` section click on `Standard` -> `Oauth2 Bearer Token`
+and place your token after `Bearer`. It should look like this
+
+```
+Name: Authoriztion
+
+Value: Bearer xxxxx
+```
+
+where xxxxx is your token
 
 ## Useful Commands
 Running your project 
