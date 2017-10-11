@@ -26,6 +26,8 @@ This project is centered around the idea that our belongings have a lifespan and
 ```
 # Launch postgres in the background
 docker-compose up -d postgres
+
+docker-compose run web mix deps.get 
 docker-compose run web mix ecto.create
 ```
 
