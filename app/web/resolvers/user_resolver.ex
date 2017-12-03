@@ -13,6 +13,13 @@ defmodule App.UserResolver do
     end
   end
 
+  def create(%{ user: user_params }, _info) do
+    %User{}
+    |> User.registration_changeset(user_params)
+    |> Repo.insert
+
+  end
+
   def update(%{id: id, user: user_params}, _info) do
     Repo.get!(User, id)
     |> User.update_changeset(user_params)

@@ -39,8 +39,12 @@ defmodule App.Schema do
     field :password, non_null(:string)
   end
 
-  # Assets
   mutation do
+    field :create_user, type: :user do
+      arg :user, :update_user_params 
+      resolve &App.UserResolver.create/2
+    end
+
 
     field :login, type: :session do
       arg :email, non_null(:string)
