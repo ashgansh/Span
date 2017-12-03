@@ -1,14 +1,16 @@
 version: '3'
 services:
-  web:
-    build: ./backend/Dockerfile
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
     - "4000:4000"
     command: mix phoenix.server
     tty: true
     stdin_open: true
     volumes:
-    - ./app:/app
+    - ./backend/app:/app
     links:
       - postgres
   postgres:
@@ -18,8 +20,13 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432"
-
-networks:
-  default:
-    external:
-      name: span
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3005:3005"
+    volumes:
+      - /app/node_modules
+      - ./frontend/app:/app
+    command: 'npm start'
