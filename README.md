@@ -5,43 +5,28 @@ For the busy or forgetful people who want to keep track of their belongings.
 This project is centered around the idea that our belongings have a lifespan and aims at notifying when they're reaching [EOL](https://en.wikipedia.org/wiki/End-of-life_(product))
 
 ## Current Implementation
+
 * Powered by Phoenix
 * Containerized using Docker
 * Data exposed using Graphql (absinthe)
 
 ## Installation
+
 ### First Time
 
 #### Clone the Repo
+
 `git clone https://github.com/benjaminshafii/Span`
 
 
-#### Create a docker network
+### Create a docker network
+
 `docker network create span`
 
-#### Add the deps
-`docker-compose run web mix deps.get`
+### Launch project
+`sh ./init.sh`
 
-#### Generate the db
-```
-# Launch postgres in the background
-docker-compose up -d postgres
-
-docker-compose run web mix deps.get 
-docker-compose run web mix ecto.create
-```
-
-#### Apply all the migrations
-`docker-compose run web mix ecto.migrate`
-
-#### Generate some seed data (Optional)
-
-Check the file to see what data is generated. Change it as you will!
-
-`docker-compose run web mix run priv/repo/seeds.exs`
-
-
-### To Launch the containers
+## Using it
 
 `docker-compose up`
 
